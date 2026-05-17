@@ -86,6 +86,18 @@ func (t *Token) Valid(key string) (valid bool, cause error) {
 	return true, nil
 }
 
+// Header Получить значение заголовка в случае его наличия.
+func (t *Token) Header(key string) (value string, ok bool) {
+	v, ok := (*t.headers)[key]
+	return v, ok
+}
+
+// Claim Получить значение клеймы в случае ее наличия.
+func (t *Token) Claim(key string) (value string, ok bool) {
+	v, ok := (*t.claims)[key]
+	return v, ok
+}
+
 // encode Кодирование хеша токена.
 func (t *Token) encode() string {
 	h, c, s := t.encodeParts(t.key)

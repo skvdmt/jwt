@@ -34,4 +34,16 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Printf("token valid: %v\n", v)
+
+	// Получение заголовка.
+	a, ok := t.Header("alg")
+	if ok {
+		fmt.Printf("token header alg: %s, %v\n", a, ok)
+	}
+
+	// Получение клеймы.
+	e, ok := t.Claim("exp")
+	if ok {
+		fmt.Printf("token claim exp: %s, %v\n", e, ok)
+	}
 }
