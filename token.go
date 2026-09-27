@@ -98,7 +98,7 @@ func (t *Token) Claim(key string) (value string, ok bool) {
 	return v, ok
 }
 
-// encode Кодирование хеша токена.
+// Encode Кодирование хеша токена.
 func (t *Token) encode() string {
 	h, c, s := t.encodeParts(t.key)
 	return fmt.Sprintf("%s.%s.%s", h, c, s)
@@ -114,7 +114,7 @@ func (t *Token) encodeParts(key string) (headers string, claims string, signatur
 	c := base64.RawURLEncoding.EncodeToString(j)
 	// Создание хеша токена.
 	hasher := hmac.New(sha256.New, []byte(key))
-	fmt.Fprintf(hasher, "%s.%s", h, c)
+	_, _ = fmt.Fprintf(hasher, "%s.%s", h, c)
 	s := base64.RawURLEncoding.EncodeToString(hasher.Sum(nil))
 	return h, c, s
 }
